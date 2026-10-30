@@ -54,10 +54,38 @@ window.addEventListener('keydown', (e) => {
   }
 });
 
+/* Letras de la fecha (MAY 01): se estiran hacia abajo, pero se detienen donde la orilla de la
+   cuña blanca aún deja margen a la derecha de la "M" (así nunca se salen del blanco y abajo
+   queda el triangulito de mar sobre el cabello). Usa la misma geometría que el CSS. */
+function fitDate() {
+  const wrap = document.querySelector('.vertical-date-wrap');
+  const month = $('hudMonth');
+  if (!wrap || !month) return;
+  wrap.style.transform = 'none';
+  const W = window.innerWidth;
+  const H = window.innerHeight;
+  const rect = month.getBoundingClientRect();
+  if (rect.bottom <= 0) return;
+
+  const desktop = W > 768;
+  const bx = (desktop ? 0.03 : 0.04) * W;                                         // x de la cuña en el borde inferior
+  const topX = desktop ? 0.042 * W + Math.min(0.43 * W, 580, 0.618 * H) : 0.56 * W; // x donde empieza la diagonal
+  const topY = desktop ? 0.3 * H : 0;
+  const need = rect.right + (desktop ? 30 : 14);                                  // borde de la M + margen
+
+  let targetBottom = H;
+  if (need > bx) targetBottom = H - ((need - bx) / (topX - bx)) * (H - topY);
+  const k = Math.min(2, Math.max(1, targetBottom / rect.bottom));
+  wrap.style.transform = `scaleY(${k.toFixed(3)})`;
+}
+window.addEventListener('resize', fitDate);
+document.fonts?.ready.then(fitDate);
+
 /* Arranque */
 initUI();
 initEffects();
 bindVisibility();
 warmUpMusic();
 setMuted(isMuted());
+fitDate();
 $('diveBtn')?.focus({ preventScroll: true });
