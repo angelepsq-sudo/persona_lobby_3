@@ -645,3 +645,41 @@ body.pre-dive .menu-item {
   .party-slot:hover { transform: none; filter: none; }
   html { -webkit-tap-highlight-color: transparent; }
 }
+
+/* ============================================================
+   10. CUÑA BLANCA COMO EN EL JUEGO
+   Arriba (cara, camisa, texto) queda sobre blanco y abajo el cabello azul se funde con el mar.
+   En escritorio la orilla derecha sigue la silueta del cabello: lo que queda a la derecha
+   del cabello es azul de mar, no blanco. --img-r = borde derecho del retrato.
+   ============================================================ */
+/* --bx = x donde la cuña toca el borde inferior. Ahí queda el triangulito de mar donde el agua
+   toma parte del cabello; js/main.js hace que las letras terminen antes de llegar a él. */
+.left-white-wedge,
+.left-cyan-trim { --bx: 3%; }
+
+.left-white-wedge { clip-path: polygon(0 0, 46% 0, var(--bx) 100%, 0 100%); }
+.left-cyan-trim   { clip-path: polygon(45.6% 0, 47.6% 0, calc(var(--bx) + 1.7vw) 100%, calc(var(--bx) - 0.3vw) 100%); }
+
+@media (min-width: 769px) {
+  .left-white-wedge,
+  .left-cyan-trim { --img-r: calc(4.2vw + min(43vw, 580px, 61.8vh)); }
+  .left-white-wedge {
+    clip-path: polygon(0 0, calc(var(--img-r) - 30px) 0, var(--img-r) 30%, var(--bx) 100%, 0 100%);
+  }
+  .left-cyan-trim {
+    clip-path: polygon(
+      calc(var(--img-r) - 30px - 0.4vw) 0, calc(var(--img-r) - 30px + 1.6vw) 0,
+      calc(var(--img-r) + 1.6vw) 30%, calc(var(--bx) + 1.7vw) 100%, calc(var(--bx) - 0.3vw) 100%,
+      calc(var(--img-r) - 0.4vw) 30%);
+  }
+}
+
+@media (max-width: 768px) {
+  .left-white-wedge,
+  .left-cyan-trim { --bx: 4%; }
+  .left-white-wedge { clip-path: polygon(0 0, 56% 0, var(--bx) 100%, 0 100%); }
+  .left-cyan-trim   { clip-path: polygon(55.6% 0, 57.8% 0, calc(var(--bx) + 1.8vw) 100%, calc(var(--bx) - 0.4vw) 100%); }
+}
+
+/* Letras MAY / 01 estiradas hacia abajo (la escala la calcula js/main.js para llegar al borde inferior) */
+.vertical-date-wrap { transform-origin: 0 14px; }
