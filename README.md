@@ -1,6 +1,6 @@
 # Portafolio // Persona 3 Reload
 
-Sitio estático (HTML + CSS + JavaScript) con un menú interactivo inspirado en Persona 3 Reload. Sin frameworks ni dependencias: se sube a Vercel tal cual.
+Sitio estático (HTML + CSS + JavaScript) con un menú interactivo inspirado en Persona 3 Reload. Sin frameworks ni dependencias.
 
 ## Estructura del proyecto
 
