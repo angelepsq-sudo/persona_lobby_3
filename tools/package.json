@@ -1,0 +1,12 @@
+{
+  "name": "portafolio-p3r-tools",
+  "private": true,
+  "description": "Herramientas de desarrollo (no se despliegan). Solo sirven para regenerar css/tailwind.css.",
+  "scripts": {
+    "build:css": "tailwindcss -c tailwind.config.js -i src/input.css -o ../css/tailwind.css --minify",
+    "watch:css": "tailwindcss -c tailwind.config.js -i src/input.css -o ../css/tailwind.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "3.4.17"
+  }
+}
